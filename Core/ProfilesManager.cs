@@ -1,9 +1,9 @@
 ﻿using System.Text.Json;
 
-using SoundSwap.Core.Helpers;
-using SoundSwap.Core.Model;
+using Swiftly.Core.Helpers;
+using Swiftly.Core.Model;
 
-namespace SoundSwap.Core
+namespace Swiftly.Core
 {
     public class ProfilesManager
     {
@@ -33,8 +33,8 @@ namespace SoundSwap.Core
         public Profile? Find(string name) => profiles.Items.FirstOrDefault(p => p.Name == name);
 
         public Profile? SetActiveProfileFromDevices(string outputName, string inputName)
-        { 
-             var index = profiles.Items.FindIndex(p => p.OutputDevice == outputName && p.InputDevice == inputName);
+        {
+            var index = profiles.Items.FindIndex(p => p.OutputDevice == outputName && p.InputDevice == inputName);
 
             if (index >= 0)
             {
@@ -48,7 +48,7 @@ namespace SoundSwap.Core
             }
         }
 
-        public void NextProfile(int nbRetry = 0)
+        public bool NextProfile(int nbRetry = 0)
         {
             var newProfile = profiles.NextElement();
 
@@ -56,14 +56,12 @@ namespace SoundSwap.Core
             {
                 // This prevents infinite loop if all elements are inactive
                 if (nbRetry > profiles.Items.Count)
-                    return;
+                    return false;
 
-                NextProfile(++nbRetry);
-                return;
+                return NextProfile(++nbRetry);
             }
 
-            audioSettingsHandler.SetCurrentOutputDevice(newProfile.OutputDevice);
-            audioSettingsHandler.SetCurrentInputDevice(newProfile.InputDevice);
+            return audioSettingsHandler.SetCurrentOutputDevice(newProfile.OutputDevice) && audioSettingsHandler.SetCurrentInputDevice(newProfile.InputDevice);
         }
 
         public void CreateEmptyProfile()

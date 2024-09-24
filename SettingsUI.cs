@@ -1,5 +1,5 @@
-﻿using SoundSwap.Core;
-using SoundSwap.Core.Model;
+﻿using Swiftly.Core;
+using Swiftly.Core.Model;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,7 +14,7 @@ using System.Xml.Linq;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
-namespace SoundSwap
+namespace Swiftly
 {
     public partial class SettingsUI : Form
     {

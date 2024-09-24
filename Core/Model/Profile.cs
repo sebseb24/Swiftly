@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SoundSwap.Core.Model
+namespace Swiftly.Core.Model
 {
     public class Profile
     {

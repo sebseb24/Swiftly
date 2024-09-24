@@ -1,7 +1,7 @@
 ﻿using AudioSwitcher.AudioApi;
 using AudioSwitcher.AudioApi.CoreAudio;
 
-namespace SoundSwap.Core
+namespace Swiftly.Core
 {
     public class AudioSettingsHandler
     {
@@ -22,14 +22,14 @@ namespace SoundSwap.Core
             return coreAudioController.DefaultCaptureDevice.FullName;
         }
 
-        public void SetCurrentOutputDevice(string outputName)
+        public bool SetCurrentOutputDevice(string outputName)
         {
-            coreAudioController.GetPlaybackDevices().ToList().FirstOrDefault(d => d.FullName.Contains(outputName, StringComparison.OrdinalIgnoreCase))?.SetAsDefault();
+            return coreAudioController.GetPlaybackDevices().ToList().FirstOrDefault(d => d.FullName.Contains(outputName, StringComparison.OrdinalIgnoreCase))?.SetAsDefault() ?? false;
         }
 
-        public void SetCurrentInputDevice(string inputName)
+        public bool SetCurrentInputDevice(string inputName)
         {
-            coreAudioController.GetCaptureDevices().ToList().FirstOrDefault(d => d.FullName.Contains(inputName, StringComparison.OrdinalIgnoreCase))?.SetAsDefault();
+            return coreAudioController.GetCaptureDevices().ToList().FirstOrDefault(d => d.FullName.Contains(inputName, StringComparison.OrdinalIgnoreCase))?.SetAsDefault() ?? false;
         }
 
         public List<string> GetAllOutputDevices()

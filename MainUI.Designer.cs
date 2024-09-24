@@ -1,6 +1,6 @@
-﻿namespace SoundSwap
+﻿namespace Swiftly
 {
-    partial class SoundSwap
+    partial class Swiftly
     {
         /// <summary>
         ///  Required designer variable.
@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SoundSwap));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Swiftly));
             flb_profile = new Label();
             flb_Output = new Label();
             flb_Input = new Label();
@@ -149,7 +149,7 @@
             exitToolStripMenuItem.Text = "Exit";
             exitToolStripMenuItem.Click += exitToolStripMenuItem_Click;
             // 
-            // SoundSwap
+            // Swiftly
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -165,11 +165,11 @@
             Controls.Add(flb_Output);
             Controls.Add(flb_profile);
             Icon = (Icon)resources.GetObject("$this.Icon");
-            Name = "SoundSwap";
-            StartPosition = FormStartPosition.CenterScreen;
+            Name = "Swiftly";
+            StartPosition = FormStartPosition.Manual;
             Text = "Swiftly";
             WindowState = FormWindowState.Minimized;
-            FormClosing += SoundSwap_FormClosing;
+            FormClosing += Swiftly_FormClosing;
             cms_NotifyIconMenuStrip.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();

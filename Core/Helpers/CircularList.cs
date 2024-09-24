@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SoundSwap.Core.Helpers
+namespace Swiftly.Core.Helpers
 {
     public class CircularList<T>
     {

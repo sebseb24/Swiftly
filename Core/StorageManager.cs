@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 
-namespace SoundSwap.Core
+namespace Swiftly.Core
 {
     public class StorageManager(string fileName)
     {

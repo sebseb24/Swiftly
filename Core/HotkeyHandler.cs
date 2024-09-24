@@ -1,8 +1,6 @@
-﻿using AudioSwitcher.AudioApi.CoreAudio;
-using System.Runtime.InteropServices;
-using System.Text;
+﻿using System.Runtime.InteropServices;
 
-namespace SoundSwap.Core
+namespace Swiftly.Core
 {
     public class HotkeyHandler
     {

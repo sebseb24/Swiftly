@@ -1,19 +1,19 @@
-using System.Runtime.InteropServices;
-using AudioSwitcher.AudioApi.CoreAudio;
 using System.Linq;
-using SoundSwap.Core;
+using Swiftly.Core;
 using System.Transactions;
 using System.Windows.Forms;
+using Swiftly.Core.Model;
 
-namespace SoundSwap
+namespace Swiftly
+
 {
-    public partial class SoundSwap : Form
+    public partial class Swiftly : Form
     {
         private readonly HotkeyHandler hotkeyHandler;
         private readonly AudioSettingsHandler audioSettingsHandler;
         private readonly ProfilesManager profilesManager;
 
-        public SoundSwap()
+        public Swiftly()
         {
             hotkeyHandler = new HotkeyHandler(this.Handle);
             audioSettingsHandler = new AudioSettingsHandler();
@@ -21,7 +21,13 @@ namespace SoundSwap
 
             InitializeComponent();
 
+            this.Location = new Point(Screen.PrimaryScreen.WorkingArea.Width - this.Width, Screen.PrimaryScreen.WorkingArea.Height - this.Height);
+
             RefreshLabels();
+
+#if DEBUG
+            this.WindowState = FormWindowState.Normal;
+#endif
         }
 
         protected override void WndProc(ref Message m)
@@ -31,8 +37,16 @@ namespace SoundSwap
                 int id = m.WParam.ToInt32();
                 if (id == hotkeyHandler.HOTKEY_ID)
                 {
-                    profilesManager.NextProfile();
-                    RefreshLabels();
+                    if (profilesManager.NextProfile())
+                    {
+                        RefreshLabels();
+                        NotificationsHandler.SendToastNotification(ToastNotificationType.Info, $"Audio device changed to '{lb_selectedProfile.Text}'");
+                    }
+                    else
+                    {
+                        RefreshLabels();
+                        NotificationsHandler.SendToastNotification(ToastNotificationType.Error, $"Error while setting audio devices.");
+                    }
                 }
             }
 
@@ -69,6 +83,7 @@ namespace SoundSwap
             this.BringToFront();
         }
 
+#if !DEBUG
         protected override void OnResize(EventArgs e)
         {
             base.OnResize(e);
@@ -78,13 +93,14 @@ namespace SoundSwap
                 this.Hide();
             }
         }
+#endif
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Environment.Exit(0);
         }
 
-        private void SoundSwap_FormClosing(object sender, FormClosingEventArgs e)
+        private void Swiftly_FormClosing(object sender, FormClosingEventArgs e)
         {
             e.Cancel = true;
 

@@ -1,4 +1,4 @@
-﻿namespace SoundSwap
+﻿namespace Swiftly
 {
     partial class SettingsUI
     {
