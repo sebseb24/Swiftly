@@ -5,16 +5,19 @@ using System.Windows.Forms;
 using Swiftly.Core.Model;
 
 namespace Swiftly
-
 {
     public partial class Swiftly : Form
     {
+        private readonly string VERSION = "v1.0.1";
+
         private readonly HotkeyHandler hotkeyHandler;
         private readonly AudioSettingsHandler audioSettingsHandler;
         private readonly ProfilesManager profilesManager;
 
         public Swiftly()
         {
+            this.Text = $"Swiftly {VERSION}";
+
             hotkeyHandler = new HotkeyHandler(this.Handle);
             audioSettingsHandler = new AudioSettingsHandler();
             profilesManager = new ProfilesManager(audioSettingsHandler);

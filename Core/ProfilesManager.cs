@@ -61,7 +61,17 @@ namespace Swiftly.Core
                 return NextProfile(++nbRetry);
             }
 
-            return audioSettingsHandler.SetCurrentOutputDevice(newProfile.OutputDevice) && audioSettingsHandler.SetCurrentInputDevice(newProfile.InputDevice);
+            // If an operation fail, go to next profile
+            if (!audioSettingsHandler.SetCurrentOutputDevice(newProfile.OutputDevice) || !audioSettingsHandler.SetCurrentInputDevice(newProfile.InputDevice))
+            {
+                // This prevents infinite loop if all elements are inactive
+                if (nbRetry > profiles.Items.Count)
+                    return false;
+
+                return NextProfile(++nbRetry);
+            }
+
+            return true;
         }
 
         public void CreateEmptyProfile()

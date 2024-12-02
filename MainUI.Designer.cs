@@ -165,9 +165,7 @@
             Controls.Add(flb_Output);
             Controls.Add(flb_profile);
             Icon = (Icon)resources.GetObject("$this.Icon");
-            Name = "Swiftly";
             StartPosition = FormStartPosition.Manual;
-            Text = "Swiftly";
             WindowState = FormWindowState.Minimized;
             FormClosing += Swiftly_FormClosing;
             cms_NotifyIconMenuStrip.ResumeLayout(false);

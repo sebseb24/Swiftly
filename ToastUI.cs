@@ -39,7 +39,7 @@ namespace Swiftly
 
             this.Location = new Point(posX, posY);
 
-            this.Focus();
+            this.TopMost = true;
         }
 
         private void SetLogLevelFields(ToastNotificationType type)
